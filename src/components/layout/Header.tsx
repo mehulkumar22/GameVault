@@ -24,13 +24,22 @@ const Header = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
   const { user, logout } = useAuth();
   const { totalItems } = useCart();
   const location = useLocation();
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const toggleProfile = () => setIsProfileOpen(!isProfileOpen);
-  
   const closeMenus = () => {
     setIsMenuOpen(false);
     setIsProfileOpen(false);
@@ -41,10 +50,10 @@ const Header = () => {
     closeMenus();
   };
 
-  const handleSearch = (query) => {
+  const handleSearch = (query: string) => {
     setSearchQuery(query);
     if (query.trim()) {
-      const filtered = games.filter(game => 
+      const filtered = games.filter(game =>
         game.title.toLowerCase().includes(query.toLowerCase()) ||
         game.genre.toLowerCase().includes(query.toLowerCase())
       );
@@ -64,7 +73,7 @@ const Header = () => {
   }
 
   return (
-    <header className="sticky top-0 z-50 bg-[#121212]">
+    <header className={`sticky top-0 z-50 transition-colors duration-300 ${isScrolled ? 'bg-[#121212]/90 backdrop-blur-sm' : 'bg-transparent'}`}>
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Back Button (Mobile) */}
@@ -116,7 +125,7 @@ const Header = () => {
 
             {/* Search Results Dropdown */}
             {isSearchFocused && searchResults.length > 0 && (
-              <div className="absolute top-full left-0 right-0 mt-2 bg-[#202020] rounded-lg shadow-xl overflow-hidden">
+              <div className="absolute top-full left-0 right-0 mt-2 bg-[#202020] rounded-lg shadow-xl overflow-hidden z-40">
                 {searchResults.map((game) => (
                   <Link
                     key={game.id}

@@ -71,6 +71,8 @@ export const games: GameType[] = [
     releaseYear: 2013,
     players: 'Single-player, Multiplayer',
     isNew: false,
+    isTrending: true,
+    isSpecial: false,
     screenshots: [
      gtaScreenshot1,
      gtaScreenshot2,
@@ -109,6 +111,8 @@ export const games: GameType[] = [
     releaseYear: 2019,
     players: 'Single-player, Multiplayer',
     isNew: false,
+    isTrending: true,
+    isSpecial: false,
     screenshots: [
     rdr2Screenshot1,
     rdr2Screenshot2,
@@ -141,6 +145,8 @@ export const games: GameType[] = [
     releaseYear: 2015,
     players: 'Single-player',
     isNew: false,
+    isTrending: true,
+    isSpecial: false,
     screenshots: [
     bmywScreenshot1,
     bmywScreenshot2,
@@ -179,6 +185,8 @@ export const games: GameType[] = [
     releaseYear: 2025,
     players: 'Single-player, Multiplayer',
     isNew: true,
+    isTrending: false,
+    isSpecial: true,
     loginCodes: [
       {
         id: '4a',
@@ -208,6 +216,8 @@ export const games: GameType[] = [
     platform: 'Steam',
     publisher: 'Sony Interactive Entertainment',
     isNew: false,
+    isTrending: false,
+    isSpecial: true,
     loginCodes: [
       {
         id: '5a',

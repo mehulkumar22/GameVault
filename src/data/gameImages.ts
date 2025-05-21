@@ -1,6 +1,6 @@
 // src/data/gameImages.ts
 
-import gtaheroImage from '../assets/images/GTA V/heroslider.jpg';
+import gtaheroImage from '../assets/images/GTA V/heroslider2.jpg';
 import gtaImage from '../assets/images/GTA V/main.jpg';
 import gtaDetailImage from '../assets/images/GTA V/detail.jpg';
 import gtaScreenshot1 from '../assets/images/GTA V/screenshot1.jpg';

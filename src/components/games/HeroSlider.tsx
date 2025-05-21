@@ -19,22 +19,20 @@ const HeroSlider = ({ slides }: HeroSliderProps) => {
     setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
   };
 
-  // Auto-rotate slides
   useEffect(() => {
     if (slides.length <= 1) return;
-    
+
     const interval = setInterval(() => {
       nextSlide();
     }, 5000);
-    
+
     return () => clearInterval(interval);
   }, [currentSlide, slides.length]);
-  
+
   if (!slides.length) return null;
 
   return (
-    <div className="relative h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden">
-      {/* Slides */}
+    <div className="relative h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] xl:h-[600px] overflow-hidden">
       {slides.map((slide, index) => (
         <div
           key={slide.id}
@@ -42,38 +40,51 @@ const HeroSlider = ({ slides }: HeroSliderProps) => {
             index === currentSlide ? 'opacity-100' : 'opacity-0 pointer-events-none'
           }`}
         >
-          {/* Dark gradient overlay */}
+          {/* Overlay */}
           <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/80 to-transparent z-10" />
-          
-          {/* Background image */}
+
+          {/* Responsive Background image */}
           <img
             src={slide.heroImageUrl}
+            srcSet={`
+              ${slide.heroImageUrl}?w=320 320w,
+              ${slide.heroImageUrl}?w=480 480w,
+              ${slide.heroImageUrl}?w=768 768w,
+              ${slide.heroImageUrl}?w=1024 1024w,
+              ${slide.heroImageUrl}?w=1280 1280w
+            `}
+            sizes="(max-width: 640px) 320px,
+                   (max-width: 768px) 480px,
+                   (max-width: 1024px) 768px,
+                   (max-width: 1280px) 1024px,
+                   1280px"
             alt={slide.title}
+            loading="lazy"
             className="h-full w-full object-cover object-center"
           />
-          
-          {/* Content */}
+
+          {/* Slide content */}
           <div className="absolute inset-0 z-20 flex items-center">
-            <div className="container mx-auto px-4">
-              <div className="max-w-xl">
+            <div className="container mx-auto px-3 sm:px-6 md:px-8">
+              <div className="max-w-md sm:max-w-lg">
                 {slide.badge && (
-                  <span className="inline-block rounded-md bg-purple-600 px-3 py-1 text-sm font-medium text-white mb-4">
+                  <span className="inline-block rounded-md bg-purple-600 px-2 py-0.5 text-[10px] sm:text-sm font-medium text-white mb-2 sm:mb-4">
                     {slide.badge}
                   </span>
                 )}
-                <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4">
+                <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-white mb-2 sm:mb-4">
                   {slide.title}
                 </h2>
-                <p className="text-lg text-slate-300 mb-6">
+                <p className="text-xs sm:text-base text-slate-300 mb-3 sm:mb-6 line-clamp-3">
                   {slide.description}
                 </p>
-                <div className="flex space-x-4">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-2 sm:space-y-0">
                   <Link to={`/games/${slide.id}`}>
-                    <Button size="lg">
+                    <Button size="sm" className="text-xs sm:text-base px-3 py-1.5 sm:px-6 sm:py-2">
                       Explore Game
                     </Button>
                   </Link>
-                  <span className="text-xl font-bold text-white flex items-center">
+                  <span className="text-sm sm:text-xl font-bold text-white">
                     Just ₹{slide.price}
                   </span>
                 </div>
@@ -82,33 +93,33 @@ const HeroSlider = ({ slides }: HeroSliderProps) => {
           </div>
         </div>
       ))}
-      
+
       {/* Navigation buttons */}
       {slides.length > 1 && (
         <>
           <button
             onClick={prevSlide}
-            className="absolute left-4 top-1/2 z-30 -translate-y-1/2 rounded-full bg-slate-900/60 p-2 text-white hover:bg-slate-900 focus:outline-none"
+            className="absolute left-2 sm:left-4 top-1/2 z-30 -translate-y-1/2 rounded-full bg-slate-900/60 p-1.5 sm:p-2 text-white hover:bg-slate-900 focus:outline-none"
           >
-            <ChevronLeft className="h-6 w-6" />
+            <ChevronLeft className="h-4 w-4 sm:h-6 sm:w-6" />
           </button>
           <button
             onClick={nextSlide}
-            className="absolute right-4 top-1/2 z-30 -translate-y-1/2 rounded-full bg-slate-900/60 p-2 text-white hover:bg-slate-900 focus:outline-none"
+            className="absolute right-2 sm:right-4 top-1/2 z-30 -translate-y-1/2 rounded-full bg-slate-900/60 p-1.5 sm:p-2 text-white hover:bg-slate-900 focus:outline-none"
           >
-            <ChevronRight className="h-6 w-6" />
+            <ChevronRight className="h-4 w-4 sm:h-6 sm:w-6" />
           </button>
         </>
       )}
-      
+
       {/* Indicators */}
       {slides.length > 1 && (
-        <div className="absolute bottom-4 left-1/2 z-30 -translate-x-1/2 flex space-x-2">
+        <div className="absolute bottom-3 left-1/2 z-30 -translate-x-1/2 flex space-x-1 sm:space-x-2">
           {slides.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`h-2 w-2 rounded-full ${
+              className={`h-1 w-1 sm:h-2 sm:w-2 rounded-full ${
                 index === currentSlide ? 'bg-white' : 'bg-white/50'
               }`}
             />
