@@ -40,6 +40,7 @@ Welcome to **Steam Account Store** — a modern web application where users will
 
 ## 📫 Contact
 
-For questions or collaboration, feel free to reach out:
-✉️ Email: [mehulkumar.mk02@gmail.com](mailto:mehulkumar.mk02@gmail.com)
+For questions, ideas, or collaboration, feel free to reach out:
+
+✉️ Email: [mehulkumar.mk02@gmail.com](mailto:mehulkumar.mk02@gmail.com)  
 🐦 GitHub: [mehulkumar22](https://github.com/mehulkumar22)
