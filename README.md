@@ -1,4 +1,4 @@
-# 🎮 Game Vault
+# 🎮 GameVault
 
 Welcome to **Steam Account Store** — a modern web application where users will be able to buy Steam account login codes preloaded with premium games like GTA V at a fixed price. The platform aims to provide a seamless and secure shopping experience with user authentication, cart & purchase flow, and an admin panel for managing accounts.
 
